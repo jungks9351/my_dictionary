@@ -10,6 +10,10 @@ const MainPage = () => {
   // useLocation hook을 이용하여 다른페이지에서 state를 전달 받음
   const wordList = location.state;
 
+  // 페이지 이동 처리
+  const handleAddBtn = () => {
+    navigate('/write');
+  };
   return (
     <>
       <CommonHeader />
