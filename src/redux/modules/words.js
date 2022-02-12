@@ -37,6 +37,18 @@ export const loadWordFB = () => {
   };
 };
 
+// create
+
+export const createWordFB = (newWord) => {
+  return async (dispatch) => {
+    const docRef = await addDoc(collection(db, 'words'), newWord);
+    const _word = await getDoc(docRef);
+    const word = { id: _word.id, ..._word.data() };
+
+    dispatch(createWord(word));
+  };
+};
+
 // Reducer
 const reducer = (state = initailState, action = {}) => {
   switch (action.type) {

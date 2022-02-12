@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CommonHeader from '../components/common/CommonHeader';
 import { useDispatch } from 'react-redux';
-import { createWord } from '../redux/modules/words';
+import { createWordFB } from '../redux/modules/words';
 
 const WritePage = () => {
   // 페이지 이동 처리 useNavigate 사용
@@ -24,8 +24,9 @@ const WritePage = () => {
       desc: inputDesc.current.value,
       exam: inputExam.current.value,
     };
-    // dispatch -> action생성 -> reducer 데이터 변경
-    dispatch(createWord(newWord));
+    // dispatch -> middleware --> action -> reducer 데이터 변경
+    dispatch(createWordFB(newWord));
+    console.log(1);
     navigate('/');
   };
 
