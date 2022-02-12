@@ -32,10 +32,6 @@ const WritePage = () => {
 
   // 페이지 이동 처리 및 words(state) 전달, 추가 구현
   const handleAddBtn = () => {
-    console.log(inputWord.current.value);
-    console.log(inputDesc.current.value);
-    console.log(inputExam.current.value);
-
     const newWord = {
       word: inputWord.current.value,
       desc: inputDesc.current.value,
