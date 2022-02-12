@@ -1,11 +1,49 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CommonHeader from '../components/common/CommonHeader';
 
 const WritePage = () => {
+  // 페이지 이동 처리 useNavigate 사용
+  const navigate = useNavigate();
+
+  // words 상태관리
+  const [words, setWords] = useState([
+    {
+      word: 'ㅎ1ㅎ1',
+      desc: '히히를 변형한 단어.',
+      exam: '저 친구가 초콜릿을 줬어. ㅎ1ㅎ1',
+    },
+    {
+      word: 'ㅎ1ㅎ1',
+      desc: '히히를 변형한 단어.',
+      exam: '저 친구가 초콜릿을 줬어. ㅎ1ㅎ1',
+    },
+    {
+      word: 'ㅎ1ㅎ1',
+      desc: '히히를 변형한 단어.',
+      exam: '저 친구가 초콜릿을 줬어. ㅎ1ㅎ1',
+    },
+  ]);
+  // useRef를 이용한 DOM요소 선택
   const inputWord = useRef(null);
   const inputDesc = useRef(null);
   const inputExam = useRef(null);
+
+  // 페이지 이동 처리 및 words(state) 전달, 추가 구현
+  const handleAddBtn = () => {
+    console.log(inputWord.current.value);
+    console.log(inputDesc.current.value);
+    console.log(inputExam.current.value);
+
+    const newWord = {
+      word: inputWord.current.value,
+      desc: inputDesc.current.value,
+      exam: inputExam.current.value,
+    };
+    setWords([...words, newWord]);
+    navigate('/', { state: words });
+  };
 
   return (
     <>
@@ -23,7 +61,7 @@ const WritePage = () => {
           <h2>예시</h2>
           <input type="text" id="exam" ref={inputExam} />
         </div>
-        <button>추가하기</button>
+        <button onClick={handleAddBtn}>추가하기</button>
       </WritePageWrapper>
     </>
   );
