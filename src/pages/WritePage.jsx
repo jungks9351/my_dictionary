@@ -1,30 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CommonHeader from '../components/common/CommonHeader';
+import { useDispatch } from 'react-redux';
+import { createWord } from '../redux/modules/words';
 
 const WritePage = () => {
   // 페이지 이동 처리 useNavigate 사용
   const navigate = useNavigate();
 
-  // words 상태관리
-  const [words, setWords] = useState([
-    {
-      word: 'ㅎ1ㅎ1',
-      desc: '히히를 변형한 단어.',
-      exam: '저 친구가 초콜릿을 줬어. ㅎ1ㅎ1',
-    },
-    {
-      word: 'ㅎ1ㅎ1',
-      desc: '히히를 변형한 단어.',
-      exam: '저 친구가 초콜릿을 줬어. ㅎ1ㅎ1',
-    },
-    {
-      word: 'ㅎ1ㅎ1',
-      desc: '히히를 변형한 단어.',
-      exam: '저 친구가 초콜릿을 줬어. ㅎ1ㅎ1',
-    },
-  ]);
+  // 액션 실행을 위해 useDispatch 사용
+  const dispatch = useDispatch();
+
   // useRef를 이용한 DOM요소 선택
   const inputWord = useRef(null);
   const inputDesc = useRef(null);
@@ -37,8 +24,9 @@ const WritePage = () => {
       desc: inputDesc.current.value,
       exam: inputExam.current.value,
     };
-    setWords([...words, newWord]);
-    navigate('/', { state: words });
+    // dispatch -> action생성 -> reducer 데이터 변경
+    dispatch(createWord(newWord));
+    navigate('/');
   };
 
   return (
