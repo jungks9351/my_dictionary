@@ -4,17 +4,17 @@ import WordItem from './WordItem';
 
 const WordList = ({ wordList }) => {
   return (
-    <WordLiestWrapper>
+    <WordListWrapper>
       {wordList &&
         wordList.map((wordItem, i) => {
           // prop으로 wordItem 데이터 전달
           return <WordItem key={i} wordData={wordItem} />;
         })}
-    </WordLiestWrapper>
+    </WordListWrapper>
   );
 };
 
-const WordLiestWrapper = styled.ul`
+const WordListWrapper = styled.ul`
   margin: 0 auto;
   display: flex;
   gap: 2rem;
