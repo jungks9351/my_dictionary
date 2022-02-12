@@ -18,14 +18,14 @@ const MainPage = () => {
     <>
       <CommonHeader />
       <MainPageWrapper>
-        <button>추가하기</button>
+        <button onClick={handleAddBtn}>추가하기</button>
         <ul>
           {wordList &&
-            wordList.map((wordItem) => {
+            wordList.map((wordItem, i) => {
               const { word, desc, exam } = wordItem;
 
               return (
-                <li>
+                <li key={i}>
                   <div className="word-box">
                     <h2>단어</h2>
                     <p>{word}</p>
