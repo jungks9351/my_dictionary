@@ -1,20 +1,23 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CommonHeader from '../components/common/CommonHeader';
 import WordList from '../components/main/WordList';
+import { useSelector } from 'react-redux';
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
-  // useLocation hook을 이용하여 다른페이지에서 state를 전달 받음
-  const wordList = location.state;
+  // redux 데이터 받아오기
+  const wordList = useSelector((state) => state.words.list);
+
+  console.log(wordList);
 
   // 페이지 이동 처리
   const handleAddBtn = () => {
     navigate('/write');
   };
+
   return (
     <>
       <CommonHeader />
