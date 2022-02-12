@@ -1,68 +1,42 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CommonHeader from '../components/common/CommonHeader';
 
 const MainPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // useLocation hook을 이용하여 다른페이지에서 state를 전달 받음
+  const wordList = location.state;
+
   return (
     <>
       <CommonHeader />
       <MainPageWrapper>
         <button>추가하기</button>
         <ul>
-          <li>
-            <div className="word-box">
-              <h2>단어</h2>
-              <p>ㅎ1ㅎ1</p>
-            </div>
-            <div className="description-box">
-              <h2>설명</h2>
-              <p>
-                히히를 변형한 단어.
-                <br />
-                숫자 1을 "ㅣ"로 쓴다.
-              </p>
-            </div>
-            <div className="example-box">
-              <h2>예시</h2>
-              <p>저 친구가 초콜릿을 줬어. ㅎ1ㅎ1</p>
-            </div>
-          </li>
-          <li>
-            <div className="word-box">
-              <h2>단어</h2>
-              <p>ㅎ1ㅎ1</p>
-            </div>
-            <div className="description-box">
-              <h2>설명</h2>
-              <p>
-                히히를 변형한 단어.
-                <br />
-                숫자 1을 "ㅣ"로 쓴다.
-              </p>
-            </div>
-            <div className="example-box">
-              <h2>예시</h2>
-              <p>저 친구가 초콜릿을 줬어. ㅎ1ㅎ1</p>
-            </div>
-          </li>
-          <li>
-            <div className="word-box">
-              <h2>단어</h2>
-              <p>ㅎ1ㅎ1</p>
-            </div>
-            <div className="description-box">
-              <h2>설명</h2>
-              <p>
-                히히를 변형한 단어.
-                <br />
-                숫자 1을 "ㅣ"로 쓴다.
-              </p>
-            </div>
-            <div className="example-box">
-              <h2>예시</h2>
-              <p>저 친구가 초콜릿을 줬어. ㅎ1ㅎ1</p>
-            </div>
-          </li>
+          {wordList &&
+            wordList.map((wordItem) => {
+              const { word, desc, exam } = wordItem;
+
+              return (
+                <li>
+                  <div className="word-box">
+                    <h2>단어</h2>
+                    <p>{word}</p>
+                  </div>
+                  <div className="description-box">
+                    <h2>설명</h2>
+                    <p>{desc}</p>
+                  </div>
+                  <div className="example-box">
+                    <h2>예시</h2>
+                    <p>{exam}</p>
+                  </div>
+                </li>
+              );
+            })}
         </ul>
       </MainPageWrapper>
     </>
