@@ -25,9 +25,10 @@ const WritePage = () => {
       exam: inputExam.current.value,
     };
     // dispatch -> middleware --> action -> reducer 데이터 변경
+
     dispatch(createWordFB(newWord));
-    console.log(1);
-    navigate('/');
+    // 뒤로가기 구현
+    navigate(-1);
   };
 
   return (
