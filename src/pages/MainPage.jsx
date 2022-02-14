@@ -3,27 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CommonHeader from '../components/common/CommonHeader';
 import WordList from '../components/main/WordList';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadWordFB } from '../redux/modules/words';
+import { useSelector } from 'react-redux';
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // redux 데이터 받아오기
   const wordList = useSelector((state) => state.words.list);
 
   console.log(wordList);
-  console.log('---');
 
   // 페이지 이동 처리
   const handleAddBtn = () => {
     navigate('/write');
   };
-
-  React.useEffect(() => {
-    dispatch(loadWordFB());
-  }, []);
 
   return (
     <>
