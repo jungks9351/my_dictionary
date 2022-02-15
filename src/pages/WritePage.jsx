@@ -52,8 +52,6 @@ const WritePage = () => {
     } else if (type === 'update') {
       pageType = '수정하기';
       dispatch(updateWrodFB(wordList[word_index].id, newWord));
-      // reducer에 update를 새로 만들지 않고 load를 다시 해줌
-      dispatch(loadWordFB());
     }
 
     // 뒤로가기 구현
@@ -70,7 +68,7 @@ const WritePage = () => {
             type="text"
             id="word"
             ref={inputWord}
-            autocomplete="off"
+            autoComplete="off"
             defaultValue={wordList[word_index] ? wordList[word_index].word : ''}
           />
         </div>
@@ -80,7 +78,7 @@ const WritePage = () => {
             type="text"
             id="desc"
             ref={inputDesc}
-            autocomplete="off"
+            autoComplete="off"
             defaultValue={wordList[word_index] ? wordList[word_index].desc : ''}
           />
         </div>
@@ -90,7 +88,7 @@ const WritePage = () => {
             type="text"
             id="exam"
             ref={inputExam}
-            autocomplete="off"
+            autoComplete="off"
             defaultValue={wordList[word_index] ? wordList[word_index].exam : ''}
           />
         </div>
