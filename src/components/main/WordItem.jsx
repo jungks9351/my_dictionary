@@ -1,10 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const WordItem = ({ wordData }) => {
+const WordItem = ({ wordData, index }) => {
+  const navigate = useNavigate();
+
   // prop 전달 받음
   // 디스트럭팅
   const { word, desc, exam } = wordData;
+
+  const handleUpdateBtn = () => {
+    navigate(`/write/update/${index}`);
+  };
 
   return (
     <WordItemWrapper>
@@ -19,6 +26,10 @@ const WordItem = ({ wordData }) => {
       <div className="example-box">
         <h2>예시</h2>
         <p>{exam}</p>
+      </div>
+      <div className="btn-box">
+        <button onClick={handleUpdateBtn}>수정하기</button>
+        <button>삭제하기</button>
       </div>
     </WordItemWrapper>
   );
