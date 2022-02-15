@@ -62,7 +62,7 @@ const WritePage = () => {
     <>
       <CommonHeader />
       <WritePageWrapper>
-        <div>
+        <div className="input-box">
           <h2>단어</h2>
           <input
             type="text"
@@ -72,7 +72,7 @@ const WritePage = () => {
             defaultValue={wordList[word_index] ? wordList[word_index].word : ''}
           />
         </div>
-        <div>
+        <div className="input-box">
           <h2>설명</h2>
           <input
             type="text"
@@ -82,7 +82,7 @@ const WritePage = () => {
             defaultValue={wordList[word_index] ? wordList[word_index].desc : ''}
           />
         </div>
-        <div>
+        <div className="input-box">
           <h2>예시</h2>
           <input
             type="text"
@@ -99,23 +99,40 @@ const WritePage = () => {
 };
 
 const WritePageWrapper = styled.main`
-  width: 50vw;
+  width: 400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 2rem;
+  border: 5px solid #ace;
+  padding: 1rem;
+  .input-box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 auto;
 
-  input {
-    width: 100%;
-    background-color: #eee;
+    h2 {
+      font-size: 3rem;
+      font-weight: bolder;
+    }
+    input {
+      width: 100%;
+      height: 3rem;
+      font-size: 3rem;
+      background-color: #eee;
+    }
   }
 
   button {
     margin: 0 auto;
-    width: 100px;
-    border: 1px solid #000;
+    width: 100%;
     padding: 1rem;
+    background-color: #ace;
+    font-size: 2rem;
+    font-weight: bolder;
+    border-radius: 5rem;
   }
 `;
 
