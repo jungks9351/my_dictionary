@@ -20,7 +20,9 @@ const MainPage = () => {
     <>
       <CommonHeader />
       <MainPageWrapper>
-        <button onClick={handleAddBtn}>추가하기</button>
+        <button className="add-btn" onClick={handleAddBtn}>
+          추가
+        </button>
         {/* prop으로 wordList 전달 */}
         <WordList wordList={wordList} />
       </MainPageWrapper>
@@ -28,16 +30,15 @@ const MainPage = () => {
   );
 };
 
-const MainPageWrapper = styled.div`
+const MainPageWrapper = styled.main`
+  width: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 0 auto;
-  button {
-    margin: 0 auto;
-    width: 100px;
-    border: 1px solid #000;
+  border: 5px solid #ace;
+  .add-btn {
+    width: 100%;
+    background-color: #ace;
     padding: 1rem;
   }
 `;
