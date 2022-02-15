@@ -15,10 +15,13 @@ const WordList = ({ wordList }) => {
 };
 
 const WordListWrapper = styled.ul`
-  margin: 0 auto;
+  width: 100%;
+  height: 500px;
+  padding: 4rem;
   display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
+  gap: 3rem;
+  flex-direction: column;
+  overflow: scroll;
 `;
 
 export default WordList;
