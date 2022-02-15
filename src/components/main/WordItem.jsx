@@ -1,16 +1,23 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { deleteWordFB } from '../../redux/modules/words';
 
 const WordItem = ({ wordData, index }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // prop 전달 받음
   // 디스트럭팅
-  const { word, desc, exam } = wordData;
+  const { id, word, desc, exam } = wordData;
 
   const handleUpdateBtn = () => {
     navigate(`/write/update/${index}`);
+  };
+
+  const handleDeleteBtn = () => {
+    dispatch(deleteWordFB(id));
   };
 
   return (
@@ -29,7 +36,7 @@ const WordItem = ({ wordData, index }) => {
       </div>
       <div className="btn-box">
         <button onClick={handleUpdateBtn}>수정하기</button>
-        <button>삭제하기</button>
+        <button onClick={handleDeleteBtn}>삭제하기</button>
       </div>
     </WordItemWrapper>
   );
