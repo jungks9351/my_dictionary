@@ -43,8 +43,9 @@ const WordItem = ({ wordData, index }) => {
 };
 
 const WordItemWrapper = styled.li`
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
   box-shadow: 1px 5px 15px 1px rgba(0, 0, 0, 0.2);
   padding: 3rem;
   display: flex;
@@ -59,6 +60,15 @@ const WordItemWrapper = styled.li`
   }
   .example-box > p {
     color: #0000ff;
+  }
+  .btn-box {
+    display: flex;
+    justify-content: space-around;
+    button {
+      background-color: #ace;
+      padding: 1rem;
+      border-radius: 1rem;
+    }
   }
 `;
 
