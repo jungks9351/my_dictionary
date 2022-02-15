@@ -4,20 +4,22 @@ import MainPage from './pages/MainPage';
 import WritePage from './pages/WritePage';
 import { useDispatch } from 'react-redux';
 import { loadWordFB } from './redux/modules/words';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
-  // 최초 랜더링 시 DB 받기
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(loadWordFB());
-  });
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/write" element={<WritePage />} />
+        <Route path="/write/:type/:id" element={<WritePage />} />
+        <Route path="/write/:type" element={<WritePage />} />
         <Route path="/" element={<MainPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
