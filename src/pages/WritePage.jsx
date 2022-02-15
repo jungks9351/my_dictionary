@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import CommonHeader from '../components/common/CommonHeader';
 import { useDispatch } from 'react-redux';
@@ -12,20 +12,41 @@ const WritePage = () => {
   // 액션 실행을 위해 useDispatch 사용
   const dispatch = useDispatch();
 
+  // param 값 가져오기 위해 useParams 사용
+  // params 값에 의해 버튼 text 변경
+  const params = useParams();
+  let { type } = params;
+
+  let pageType;
+
+  if (type === 'add') {
+    pageType = '추가하기';
+  } else if (type === 'update') {
+    pageType = '수정하기';
+  }
+
   // useRef를 이용한 DOM요소 선택
   const inputWord = useRef(null);
   const inputDesc = useRef(null);
   const inputExam = useRef(null);
 
   // 페이지 이동 처리 및 words(state) 전달, 추가 구현
-  const handleAddBtn = () => {
-    const newWord = {
-      word: inputWord.current.value,
-      desc: inputDesc.current.value,
-      exam: inputExam.current.value,
-    };
-    // dispatch -> middleware --> action -> reducer 데이터 변경
+  const handleBtn = () => {
+    const word = inputWord.current.value;
+    const desc = inputDesc.current.value;
+    const exam = inputExam.current.value;
 
+    if (!word || !desc || !exam) {
+      alert('입력하세요');
+      return;
+    }
+    const newWord = {
+      word,
+      desc,
+      exam,
+    };
+
+    // dispatch -> middleware --> action -> reducer 데이터 변경
     dispatch(createWordFB(newWord));
     // 뒤로가기 구현
     navigate(-1);
@@ -47,7 +68,7 @@ const WritePage = () => {
           <h2>예시</h2>
           <input type="text" id="exam" ref={inputExam} />
         </div>
-        <button onClick={handleAddBtn}>추가하기</button>
+        <button onClick={handleBtn}>{pageType}</button>
       </WritePageWrapper>
     </>
   );
