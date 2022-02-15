@@ -11,11 +11,9 @@ const MainPage = () => {
   // redux 데이터 받아오기
   const wordList = useSelector((state) => state.words.list);
 
-  console.log(wordList);
-
   // 페이지 이동 처리
   const handleAddBtn = () => {
-    navigate('/write');
+    navigate('/write/add');
   };
 
   return (
