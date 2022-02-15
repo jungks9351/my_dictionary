@@ -2,20 +2,17 @@ import React, { useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import CommonHeader from '../components/common/CommonHeader';
-import { useDispatch } from 'react-redux';
-import { createWordFB } from '../redux/modules/words';
+import { useDispatch, useSelector } from 'react-redux';
+import { createWordFB, loadWordFB, updateWrodFB } from '../redux/modules/words';
 
 const WritePage = () => {
-  // 페이지 이동 처리 useNavigate 사용
   const navigate = useNavigate();
-
-  // 액션 실행을 위해 useDispatch 사용
   const dispatch = useDispatch();
-
-  // param 값 가져오기 위해 useParams 사용
-  // params 값에 의해 버튼 text 변경
   const params = useParams();
-  let { type } = params;
+
+  const wordList = useSelector((state) => state.words.list);
+
+  let { type, id: word_index } = params;
 
   let pageType;
 
@@ -47,7 +44,18 @@ const WritePage = () => {
     };
 
     // dispatch -> middleware --> action -> reducer 데이터 변경
-    dispatch(createWordFB(newWord));
+    // 추가할때
+    if (type === 'add') {
+      pageType = '추가하기';
+      dispatch(createWordFB(newWord));
+      // 업데이트 할때
+    } else if (type === 'update') {
+      pageType = '수정하기';
+      dispatch(updateWrodFB(wordList[word_index].id, newWord));
+      // reducer에 update를 새로 만들지 않고 load를 다시 해줌
+      dispatch(loadWordFB());
+    }
+
     // 뒤로가기 구현
     navigate(-1);
   };
@@ -58,15 +66,30 @@ const WritePage = () => {
       <WritePageWrapper>
         <div>
           <h2>단어</h2>
-          <input type="text" id="word" ref={inputWord} />
+          <input
+            type="text"
+            id="word"
+            ref={inputWord}
+            defaultValue={wordList[word_index] ? wordList[word_index].word : ''}
+          />
         </div>
         <div>
           <h2>설명</h2>
-          <input type="text" id="desc" ref={inputDesc} />
+          <input
+            type="text"
+            id="desc"
+            ref={inputDesc}
+            defaultValue={wordList[word_index] ? wordList[word_index].desc : ''}
+          />
         </div>
         <div>
           <h2>예시</h2>
-          <input type="text" id="exam" ref={inputExam} />
+          <input
+            type="text"
+            id="exam"
+            ref={inputExam}
+            defaultValue={wordList[word_index] ? wordList[word_index].exam : ''}
+          />
         </div>
         <button onClick={handleBtn}>{pageType}</button>
       </WritePageWrapper>
