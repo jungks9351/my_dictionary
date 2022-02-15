@@ -10,6 +10,7 @@ const initailState = {
 // Action 타입 정의
 const LOAD = 'words/LOAD';
 const CREATE = 'words/CREATE';
+const UPDATE = 'words/UPDATE';
 
 // Action 생성자 함수 생성
 // payload = word
@@ -19,6 +20,10 @@ export const loadWord = (wordList) => {
 
 export const createWord = (word) => {
   return { type: CREATE, word };
+};
+
+export const updateWord = (word) => {
+  return { type: UPDATE, word };
 };
 
 //middlewares
@@ -42,11 +47,16 @@ export const loadWordFB = () => {
 export const createWordFB = (newWord) => {
   return async (dispatch) => {
     const docRef = await addDoc(collection(db, 'words'), newWord);
-    const _word = await getDoc(docRef);
-    const word = { id: _word.id, ..._word.data() };
+    const word = { id: docRef.id, ...newWord };
 
     dispatch(createWord(word));
   };
+};
+
+// update
+
+export const updateWrodFB = (wordId) => {
+  return (dispatch) => {};
 };
 
 // Reducer
