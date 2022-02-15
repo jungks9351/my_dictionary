@@ -70,6 +70,7 @@ const WritePage = () => {
             type="text"
             id="word"
             ref={inputWord}
+            autocomplete="off"
             defaultValue={wordList[word_index] ? wordList[word_index].word : ''}
           />
         </div>
@@ -79,6 +80,7 @@ const WritePage = () => {
             type="text"
             id="desc"
             ref={inputDesc}
+            autocomplete="off"
             defaultValue={wordList[word_index] ? wordList[word_index].desc : ''}
           />
         </div>
@@ -88,6 +90,7 @@ const WritePage = () => {
             type="text"
             id="exam"
             ref={inputExam}
+            autocomplete="off"
             defaultValue={wordList[word_index] ? wordList[word_index].exam : ''}
           />
         </div>
