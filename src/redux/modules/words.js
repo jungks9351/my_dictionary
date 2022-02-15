@@ -2,6 +2,7 @@ import { db } from '../../firebase';
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDocs,
   updateDoc,
@@ -17,6 +18,7 @@ const initailState = {
 const LOAD = 'words/LOAD';
 const CREATE = 'words/CREATE';
 const UPDATE = 'words/UPDATE';
+const DELETE = 'words/DELETE';
 
 // Action 생성자 함수 생성
 // payload = word
@@ -28,8 +30,12 @@ export const createWord = (word) => {
   return { type: CREATE, word };
 };
 
-export const updateWord = (id, word) => {
-  return { type: UPDATE, id, word };
+export const updateWord = (id, newWord) => {
+  return { type: UPDATE, id, newWord };
+};
+
+export const deleteWord = (id) => {
+  return { type: DELETE, id };
 };
 
 //middlewares
@@ -76,6 +82,21 @@ export const updateWrodFB = (wordId, changeData) => {
   };
 };
 
+// delete
+
+export const deleteWordFB = (wordId) => {
+  return async (dispatch, getState) => {
+    const docRef = doc(db, 'words', wordId);
+    await deleteDoc(docRef);
+
+    const _word_list = getState().words.list;
+    const word_index = _word_list.findIndex((word) => {
+      return word.id === wordId;
+    });
+    dispatch(deleteWord(word_index));
+  };
+};
+
 // Reducer
 const reducer = (state = initailState, action = {}) => {
   switch (action.type) {
@@ -86,6 +107,28 @@ const reducer = (state = initailState, action = {}) => {
       const newWordList = [...state.list, action.word];
 
       return { list: newWordList };
+    }
+    case UPDATE: {
+      const newWordList = state.list.map((list, idx) => {
+        if (parseInt(action.id) === idx) {
+          return {
+            ...list,
+            word: action.newWord.word,
+            desc: action.newWord.desc,
+            exam: action.newWord.exam,
+          };
+        } else {
+          return list;
+        }
+      });
+
+      return { ...state, list: newWordList };
+    }
+    case DELETE: {
+      const newWordList = state.list.filter((list, idx) => {
+        return parseInt(action.id) !== idx;
+      });
+      return { ...state, list: newWordList };
     }
 
     default:
