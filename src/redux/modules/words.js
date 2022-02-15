@@ -1,5 +1,11 @@
 import { db } from '../../firebase';
-import { addDoc, collection, getDoc, getDocs } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  updateDoc,
+} from 'firebase/firestore';
 
 // 초기값 설정
 
@@ -22,8 +28,8 @@ export const createWord = (word) => {
   return { type: CREATE, word };
 };
 
-export const updateWord = (word) => {
-  return { type: UPDATE, word };
+export const updateWord = (id, word) => {
+  return { type: UPDATE, id, word };
 };
 
 //middlewares
@@ -55,8 +61,19 @@ export const createWordFB = (newWord) => {
 
 // update
 
-export const updateWrodFB = (wordId) => {
-  return (dispatch) => {};
+export const updateWrodFB = (wordId, changeData) => {
+  return async (dispatch, getState) => {
+    const docRef = doc(db, 'words', wordId);
+    await updateDoc(docRef, changeData);
+
+    const _word_list = getState().words.list;
+
+    const word_index = _word_list.findIndex((word) => {
+      return word.id === wordId;
+    });
+
+    dispatch(updateWord(word_index, changeData));
+  };
 };
 
 // Reducer
@@ -70,6 +87,7 @@ const reducer = (state = initailState, action = {}) => {
 
       return { list: newWordList };
     }
+
     default:
       return state;
   }
