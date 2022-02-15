@@ -8,7 +8,7 @@ const WordList = ({ wordList }) => {
       {wordList &&
         wordList.map((wordItem, i) => {
           // prop으로 wordItem 데이터 전달
-          return <WordItem key={i} wordData={wordItem} />;
+          return <WordItem key={i} index={i} wordData={wordItem} />;
         })}
     </WordListWrapper>
   );
