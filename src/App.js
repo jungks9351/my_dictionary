@@ -7,6 +7,11 @@ import { loadWordFB } from './redux/modules/words';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(loadWordFB());
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <Routes>
