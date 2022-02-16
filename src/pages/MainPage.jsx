@@ -17,12 +17,6 @@ const MainPage = () => {
     navigate('/write/add');
   };
 
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(loadWordFB());
-  }, [dispatch]);
-
   return (
     <>
       <CommonHeader />
