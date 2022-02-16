@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CommonHeader from '../components/common/CommonHeader';
 import WordList from '../components/main/WordList';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadWordFB } from '../redux/modules/words';
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -15,6 +16,12 @@ const MainPage = () => {
   const handleAddBtn = () => {
     navigate('/write/add');
   };
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(loadWordFB());
+  }, [dispatch]);
 
   return (
     <>
