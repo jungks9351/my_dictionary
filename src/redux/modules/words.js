@@ -104,8 +104,7 @@ const reducer = (state = initailState, action = {}) => {
       return { list: action.wordList };
     }
     case CREATE: {
-      console.log(state.list);
-      const newWordList = [...state.list];
+      const newWordList = [...state.list, action.word];
 
       return { list: newWordList };
     }
