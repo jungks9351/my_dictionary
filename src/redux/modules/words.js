@@ -67,7 +67,7 @@ export const createWordFB = (newWord) => {
 
 // update
 
-export const updateWrodFB = (wordId, changeData) => {
+export const updateWordFB = (wordId, changeData) => {
   return async (dispatch, getState) => {
     const docRef = doc(db, 'words', wordId);
     await updateDoc(docRef, changeData);

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import CommonHeader from '../components/common/CommonHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import { createWordFB, loadWordFB, updateWrodFB } from '../redux/modules/words';
+import { createWordFB, updateWordFB } from '../redux/modules/words';
 
 const WritePage = () => {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const WritePage = () => {
       // 업데이트 할때
     } else if (type === 'update') {
       pageType = '수정하기';
-      dispatch(updateWrodFB(wordList[word_index].id, newWord));
+      dispatch(updateWordFB(wordList[word_index].id, newWord));
     }
 
     // 뒤로가기 구현
