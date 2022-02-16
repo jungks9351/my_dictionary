@@ -48,7 +48,7 @@ export const loadWordFB = () => {
     let wordList = [];
 
     wordData.forEach((doc) => {
-      wordList.push({ id: doc.id, ...doc.data() });
+      wordList = [...wordList, { id: doc.id, ...doc.data() }];
     });
     dispatch(loadWord(wordList));
   };
@@ -104,7 +104,8 @@ const reducer = (state = initailState, action = {}) => {
       return { list: action.wordList };
     }
     case CREATE: {
-      const newWordList = [...state.list, action.word];
+      console.log(state.list);
+      const newWordList = [...state.list];
 
       return { list: newWordList };
     }
